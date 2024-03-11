@@ -8,6 +8,7 @@ import pro.sky.hw2_8.exceptions.InvalidLastNameException;
 @Service
 public class ValidatorService {
     public String validateFirstName(String firstName) {
+        firstName = StringUtils.trimToNull(firstName);
         if (!StringUtils.isAlpha(firstName)) {
             throw new InvalidFirstNameException();
         }
@@ -15,7 +16,8 @@ public class ValidatorService {
     }
 
     public String validateLastName(String lastName) {
-        String[] names = lastName.split("-");
+        lastName = StringUtils.trimToNull(lastName);
+        String[] names = lastName.split(" *- *");
         for (int i = 0; i < names.length; i++) {
             if (!StringUtils.isAlpha(names[i])) {
                 throw new InvalidLastNameException();
